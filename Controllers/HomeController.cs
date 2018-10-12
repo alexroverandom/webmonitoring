@@ -7,7 +7,9 @@ namespace WebMonitoring.Controllers
 {
 	public class HomeController : Controller
 	{
-		private const string Token = "636110092:AAGH0rsJTdfeFrg7mAzWnHfJmIOFrwxbLAA";
+		private const long BotId = 159027523;
+		private const long Koef = 4;
+		private const string Token = "AAGH0rsJTdfeFrg7mAzWnHfJmIOFrwxbLAA";
 		private const long ChatId = -283586034;
 
 		public IActionResult Index()
@@ -19,7 +21,7 @@ namespace WebMonitoring.Controllers
 		}
 
 		public async Task<string> Notify(int id) {
-			var client = new TelegramBotClient(Token);
+			var client = new TelegramBotClient($"{BotId*Koef}:{Token}");
 			var me = client.GetMeAsync().Result;
 			var message = await client.SendTextMessageAsync(new ChatId(ChatId), $"You sent {id}");
 			return "Ok";
